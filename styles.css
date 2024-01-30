@@ -24,13 +24,28 @@
   aspect-ratio: 1;
 }
 
-.header.header-left div figure {
+.header.header-left div figure,
+.header.header-right div figure {
   height: inherit;
 }
 
-.header.header-left div figure img {
+img {
   display: block;
-  width: inherit;
+  width: 50px;
   object-fit: contain;
   object-position: center;
+}
+
+.note-bg {
+  width: 40px;
+  aspect-ratio: 1;
+}
+
+#inputGroup-sizing-default {
+  background-color: #fff;
+}
+
+#inputGroup-sizing-default svg {
+  fill: rgb(102, 102, 102);
+  width: 20px;
 }
