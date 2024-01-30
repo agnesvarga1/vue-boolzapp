@@ -3,7 +3,8 @@ createApp({
   created() {},
   data() {
     return {
-      currentContact: 0,
+      currentChat: 0,
+      activeChat: false,
       me: {
         name: "Agnes",
         avatar: "./img/avatar_io.jpg",
@@ -174,5 +175,10 @@ createApp({
     };
   },
 
-  methods: {},
+  methods: {
+    openChat(index) {
+      this.activeChat = !this.activeChat;
+      this.currentChat = index;
+    },
+  },
 }).mount("#app");

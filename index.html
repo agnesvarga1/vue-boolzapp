@@ -20,7 +20,7 @@
   </head>
   <body>
     <div class="py-2" id="app">
-      <div class="container border border-danger h-100 overflow-y-hidden">
+      <div class="container h-100 overflow-y-hidden">
         <div class="row">
           <!-- LEFT SIDE PART -->
           <div class="left-side col-4 p-0 border-end border-secondary">
@@ -78,28 +78,34 @@
             </div>
             <!-- CONTACTS PART -->
             <div class="contacts-list bg-light overflow-y-auto">
-              <div
-                v-for="(person, index ) in contacts"
-                class="d-flex align-items-center gap-1 border-bottom border-secondary-subtle px-2 py-2"
-              >
-                <figure class="mb-0">
-                  <div class="avatar rounded-circle">
-                    <img
-                      class="profile-pic"
-                      :src="person.avatar"
-                      alt="{{person.name}}"
-                    />
+              <div v-for="(person, index ) in contacts" :key="index">
+                <div
+                  @click="openChat(index)"
+                  class="d-flex align-items-center gap-1 border-bottom border-secondary-subtle px-2 py-2 contact-card"
+                  :class="(currentChat === index)? `bg-secondary-subtle`: ``"
+                >
+                  <figure class="mb-0">
+                    <div class="avatar rounded-circle">
+                      <img
+                        class="profile-pic"
+                        :src="person.avatar"
+                        alt="{{person.name}}"
+                      />
+                    </div>
+                  </figure>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h5 class="mb-0">{{person.name}}</h5>
+                    <span class="text-secondary"
+                      >Ultimo messaggio inviato 12:00</span
+                    >
                   </div>
-                </figure>
-                <div class="d-flex flex-column justify-content-center">
-                  <h5 class="mb-0">{{person.name}}</h5>
-                  <span class="text-secondary"
-                    >Ultimo messaggio inviato 12:00</span
-                  >
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- RIGHT SIDE OF THE MAIN -->
+
           <div class="right-side col-8 px-0">
             <div
               class="header header-right bg-secondary-subtle p-1 d-flex align-items-center justify-content-between"
@@ -107,11 +113,15 @@
               <div class="h-100 d-flex align-items-center gap-1">
                 <figure class="mb-0">
                   <div class="avatar rounded-circle">
-                    <img class="profile-pic" src="./img/avatar_1.jpg" alt="" />
+                    <img
+                      class="profile-pic"
+                      :src="contacts[currentChat].avatar"
+                      alt=""
+                    />
                   </div>
                 </figure>
                 <div class="d-flex flex-column justify-content-center">
-                  <h5 class="mb-0">Agnes</h5>
+                  <h5 class="mb-0">{{contacts[currentChat].name}}</h5>
                   <span class="text-secondary"
                     >Ultimo accesso oggi alle 12:00</span
                   >
@@ -125,16 +135,21 @@
             </div>
             <!-- CHAT WINDOW -->
             <div class="chat-window overflow-y-auto">
-              <div class="sent-msg d-flex justify-content-end p-2">
-                <span
-                  class="badge p-3 text-dark bg-success-subtle align-self-end"
-                  >this is a message</span
+              <div v-for="(msg) in contacts[currentChat].messages">
+                <div
+                  v-if="msg.status === `sent`"
+                  class="sent-msg d-flex justify-content-end p-2"
                 >
-              </div>
-              <div class="recived-msg p-2">
-                <span class="badge w-25 p-3 text-dark bg-light text-start"
-                  >this is a message</span
-                >
+                  <span
+                    class="badge p-3 text-dark bg-success-subtle align-self-end"
+                    >{{msg. message}}</span
+                  >
+                </div>
+                <div v-else class="recived-msg p-2">
+                  <span class="badge p-3 text-dark bg-light text-start"
+                    >{{msg.message}}</span
+                  >
+                </div>
               </div>
             </div>
             <!-- INPUTFIELD FOR SENDING A NEW MSG -->
@@ -178,6 +193,8 @@
         </div>
       </div>
     </div>
+
+    <!-- SCRIPTS -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
       integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="

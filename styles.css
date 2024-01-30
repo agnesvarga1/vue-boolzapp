@@ -63,6 +63,10 @@ img {
   height: calc(100vh - 160px);
 }
 
+.contact-card {
+  cursor: pointer;
+}
+
 .chat-window {
   height: calc(100% - 130px);
   background-image: url("./img/mine.jpg");
