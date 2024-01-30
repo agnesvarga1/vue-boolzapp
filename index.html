@@ -31,10 +31,10 @@
               <div class="h-100 d-flex align-items-center gap-1">
                 <figure class="mb-0">
                   <div class="avatar rounded-circle">
-                    <img class="profile-pic" src="./img/avatar_io.jpg" alt="" />
+                    <img :src="me.avatar" alt="" class="profile-pic" />
                   </div>
                 </figure>
-                <h5>Agnes</h5>
+                <h5>{{me.name}}</h5>
               </div>
               <div class="icons-me text-secondary fs-4 d-flex gap-1">
                 <i class="fa-solid fa-circle-notch"></i>
@@ -42,7 +42,7 @@
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </div>
             </div>
-            <!-- NOTE PART -->
+            <!-- NOTIFICATION PART -->
             <div class="note bg-primary-subtle d-flex p-2">
               <div
                 class="bg-light me-2 rounded-circle d-flex align-items-center justify-content-center note-bg"
@@ -52,12 +52,12 @@
                 </div>
               </div>
               <div>
-                <p class="fs-6 mb-0">Ricevi Notifiche di nuovo messaggi</p>
+                <p class="mb-0">Ricevi Notifiche di nuovo messaggi</p>
                 <a class="text-secondary" href="">Attiva notifiche desktop</a>
               </div>
             </div>
             <!-- INPUT SEARCH IN CONTACTS -->
-            <div class="bg-light p-2">
+            <div class="bg-light p-2 search-contact">
               <div class="input-group text-secondary">
                 <span class="input-group-text" id="inputGroup-sizing-default">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -77,7 +77,28 @@
               </div>
             </div>
             <!-- CONTACTS PART -->
-            <div class="contacts-list"></div>
+            <div class="contacts-list bg-light">
+              <div
+                v-for="(person, index ) in contacts"
+                class="h-100 d-flex align-items-center gap-1 border-bottom border-secondary-subtle px-2 py-1"
+              >
+                <figure class="mb-0">
+                  <div class="avatar rounded-circle">
+                    <img
+                      class="profile-pic"
+                      :src="person.avatar"
+                      alt="{{person.name}}"
+                    />
+                  </div>
+                </figure>
+                <div class="d-flex flex-column justify-content-center">
+                  <h5 class="mb-0">{{person.name}}</h5>
+                  <span class="text-secondary"
+                    >Ultimo accesso oggi alle 12:00</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
           <div class="right-side col-8 px-0">
             <div
