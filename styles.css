@@ -14,7 +14,10 @@
   height: 100vh;
 }
 
-.header,
+.header {
+  height: 60px;
+}
+
 .note,
 .search-contact {
   height: 50px;
@@ -57,6 +60,13 @@ img {
 }
 
 .contacts-list {
-  height: calc(100%-150px);
-  overflow: auto;
+  height: calc(100vh - 160px);
+}
+
+.chat-window {
+  height: calc(100% - 130px);
+  background-image: url("./img/mine.jpg");
+}
+.message-input {
+  height: 70px;
 }
