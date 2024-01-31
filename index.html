@@ -166,7 +166,8 @@
             </div>
             <!-- INPUTFIELD FOR SENDING A NEW MSG-s -->
             <div
-              class="message-input pb-3 bg-secondary-subtle d-flex align-items-center justify-content-evenly"
+              @keyup.enter="sendNewMsg(contacts[currentChat])"
+              class="message-input py-2 bg-secondary-subtle d-flex align-items-center justify-content-evenly"
             >
               <svg
                 width="25"
@@ -181,6 +182,7 @@
 
               <div class="input-group input-group-sm w-75">
                 <input
+                  v-model="newMsg.message"
                   type="text"
                   class="form-control"
                   aria-label="Sizing example input"

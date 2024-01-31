@@ -4,7 +4,11 @@ createApp({
   data() {
     return {
       currentChat: 0,
-      newMsg: "",
+      newMsg: {
+        date: "",
+        message: "",
+        status: "sent",
+      },
       me: {
         name: "Agnes",
         avatar: "./img/avatar_io.jpg",
@@ -177,17 +181,26 @@ createApp({
 
   methods: {
     openChat(index) {
-      this.activeChat = !this.activeChat;
+      // this.activeChat = !this.activeChat;
       this.currentChat = index;
     },
+    sendNewMsg(current) {
+      const msg = { ...this.newMsg };
 
+      let now = new Date();
+      let created = now;
+      msg.date = created;
+
+      if (msg.message !== "") {
+        current.messages.push(msg);
+      }
+
+      this.newMsg.message = "";
+    },
     addTimeChat(param) {
-      console.log(param);
-      param = String(param);
       let myDate = new Date(param);
-      console.log(myDate);
+
       let dateDisplay = `${myDate.getHours()}:${myDate.getMinutes()}`;
-      console.log(dateDisplay);
       return dateDisplay;
     },
   },
