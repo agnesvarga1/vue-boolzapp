@@ -9,6 +9,11 @@ createApp({
         message: "",
         status: "sent",
       },
+      newAnswer: {
+        date: "",
+        message: "",
+        status: "received",
+      },
       me: {
         name: "Agnes",
         avatar: "./img/avatar_io.jpg",
@@ -181,7 +186,6 @@ createApp({
 
   methods: {
     openChat(index) {
-      // this.activeChat = !this.activeChat;
       this.currentChat = index;
     },
     sendNewMsg(current) {
@@ -196,6 +200,20 @@ createApp({
       }
 
       this.newMsg.message = "";
+      //this.msgSent = true;
+      setTimeout(() => {
+        this.sendNewResponse(current);
+      }, 5000);
+    },
+
+    sendNewResponse(current) {
+      const answer = { ...this.newAnswer };
+      let now = new Date();
+      let created = now;
+      answer.date = created;
+      answer.message = "ok";
+
+      current.messages.push(answer);
     },
     addTimeChat(param) {
       let myDate = new Date(param);
