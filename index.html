@@ -93,11 +93,14 @@
                       />
                     </div>
                   </figure>
-                  <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex flex-column justify-content-center w-100">
                     <h5 class="mb-0">{{person.name}}</h5>
-                    <span class="text-secondary"
-                      >Ultimo messaggio inviato 12:00</span
+                    <div
+                      class="fs-6 text-secondary w-100 d-flex justify-content-between"
                     >
+                      <span class="">Ultimo messaggio inviato</span
+                      ><span class="">{{person.messages[0].date}}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -123,8 +126,8 @@
                 <div class="d-flex flex-column justify-content-center">
                   <h5 class="mb-0">{{contacts[currentChat].name}}</h5>
                   <span class="text-secondary"
-                    >Ultimo accesso oggi alle 12:00</span
-                  >
+                    >Ultimo accesso oggi alle <span>12:00</span>
+                  </span>
                 </div>
               </div>
               <div class="p-1 fs-4 text-secondary d-flex gap-1">
@@ -134,25 +137,34 @@
               </div>
             </div>
             <!-- CHAT WINDOW -->
-            <div class="chat-window overflow-y-auto">
+            <div class="chat-window overflow-y-scroll">
               <div v-for="(msg) in contacts[currentChat].messages">
                 <div
                   v-if="msg.status === `sent`"
                   class="sent-msg d-flex justify-content-end p-2"
                 >
-                  <span
-                    class="badge p-3 text-dark bg-success-subtle align-self-end"
-                    >{{msg. message}}</span
+                  <div
+                    class="badge p-3 ps-1 mb-1 text-dark bg-success-subtle position-relative"
                   >
+                    {{msg.message}}
+                    <span
+                      class="time-badge text-secondary position-absolute bottom-0 end-0"
+                      >{{addTimeChat(msg.date)}}</span
+                    >
+                  </div>
                 </div>
                 <div v-else class="recived-msg p-2">
-                  <span class="badge p-3 text-dark bg-light text-start"
-                    >{{msg.message}}</span
+                  <span
+                    class="badge p-3 ps-1 mb-2 text-dark bg-light text-start position-relative"
+                    >{{msg.message}}<span
+                      class="text-secondary mb-1 me-1 time-badge position-absolute bottom-0 end-0"
+                      >{{addTimeChat(msg.date)}}</span
+                    ></span
                   >
                 </div>
               </div>
             </div>
-            <!-- INPUTFIELD FOR SENDING A NEW MSG -->
+            <!-- INPUTFIELD FOR SENDING A NEW MSG-s -->
             <div
               class="message-input pb-3 bg-secondary-subtle d-flex align-items-center justify-content-evenly"
             >
