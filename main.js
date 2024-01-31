@@ -4,7 +4,7 @@ createApp({
   data() {
     return {
       currentChat: 0,
-      newMsg:"",
+      newMsg: "",
       me: {
         name: "Agnes",
         avatar: "./img/avatar_io.jpg",
@@ -180,10 +180,6 @@ createApp({
       this.activeChat = !this.activeChat;
       this.currentChat = index;
     },
-
-    writeNewMsg(){
-
-    }
 
     addTimeChat(param) {
       console.log(param);
