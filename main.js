@@ -221,8 +221,17 @@ createApp({
       return this.contactsSearch;
     },
 
-    openChat(index) {
-      this.currentChat = index;
+    openChat(idx) {
+      if (this.searchChat === "") {
+        this.currentChat = idx;
+      } else {
+        this.contacts.forEach((elem, index) => {
+          elem.name === this.contactsSearch[idx].name
+            ? (this.currentChat = index)
+            : 0;
+        });
+        this.searchChat = "";
+      }
     },
     sendNewMsg(current) {
       const msg = { ...this.newMsg };

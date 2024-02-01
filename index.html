@@ -82,7 +82,7 @@
             <!-- CONTACTS PART -->
             <div class="contacts-list bg-light overflow-y-scroll">
               <div
-                v-for="(person, index ) in searchChat ===`` ? contacts : contactsSearch"
+                v-for="(person, index ) in searchChat !==`` ?  contactsSearch :  contacts"
                 :key="index"
               >
                 <div
