@@ -269,5 +269,4 @@ createApp({
       return dateDisplay;
     },
   },
-  computed: {},
 }).mount("#app");
