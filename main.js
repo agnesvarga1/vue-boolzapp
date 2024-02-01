@@ -205,6 +205,14 @@ createApp({
   },
 
   methods: {
+    deleteMsg(msg, idx, curr) {
+      this.contacts[curr].messages.forEach((element, index, arr) => {
+        if (idx === index) {
+          arr.splice(index, 1);
+        }
+      });
+    },
+
     emptyArr() {
       this.contactsSearch = [];
     },
