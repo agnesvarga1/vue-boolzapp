@@ -68,12 +68,11 @@ img {
 }
 
 .chat-window {
-  height: calc(100% - (60px + 60px));
+  height: calc(100% - (60px + 70px));
   background-image: url("./img/mine.jpg");
 }
 .message-input {
-  max-height: 80px;
-  vertical-align: middle;
+  height: 70px;
 }
 
 .time-badge {

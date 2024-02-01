@@ -21,9 +21,9 @@
   <body>
     <div class="py-2" id="app">
       <div class="container h-100 overflow-y-hidden">
-        <div class="row">
+        <div class="row border h-100">
           <!-- LEFT SIDE PART -->
-          <div class="left-side col-4 p-0 border-end border-secondary">
+          <div class="left-side col-4 p-0 border-end border-secondary h-100">
             <!-- LEFT HEAD -->
             <div
               class="header header-left bg-secondary-subtle p-1 d-flex align-items-center justify-content-between"
@@ -68,6 +68,8 @@
                 </span>
 
                 <input
+                  v-model="searchChat"
+                  @update="searchInChats"
                   type="text"
                   class="form-control"
                   aria-label="Sizing example input"
@@ -77,8 +79,12 @@
               </div>
             </div>
             <!-- CONTACTS PART -->
-            <div class="contacts-list bg-light overflow-y-auto">
-              <div v-for="(person, index ) in contacts" :key="index">
+            <div class="contacts-list bg-light overflow-y-scroll">
+              <!-- <div class="d-none">{{searchInChats()}}</div> -->
+              <div
+                v-for="(person, index ) in searchChat ==='' ? contacts : searchInChats()"
+                :key="index"
+              >
                 <div
                   @click="openChat(index)"
                   class="d-flex align-items-center gap-1 border-bottom border-secondary-subtle px-2 py-2 contact-card"
@@ -99,7 +105,9 @@
                       class="fs-6 text-secondary w-100 d-flex justify-content-between"
                     >
                       <span class="">Ultimo messaggio inviato</span
-                      ><span class="">{{person.messages[0].date}}</span>
+                      ><span class=""
+                        >{{person.messages[person.messages.length-1].date}}</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -109,7 +117,7 @@
 
           <!-- RIGHT SIDE OF THE MAIN -->
 
-          <div class="right-side col-8 px-0">
+          <div class="right-side col-8 px-0 h-100">
             <div
               class="header header-right bg-secondary-subtle p-1 d-flex align-items-center justify-content-between"
             >
@@ -167,7 +175,7 @@
             <!-- INPUTFIELD FOR SENDING A NEW MSG-s -->
             <div
               @keyup.enter="sendNewMsg(contacts[currentChat])"
-              class="message-input py-2 bg-secondary-subtle d-flex align-items-center justify-content-evenly"
+              class="message-input pb-2 bg-secondary-subtle d-flex align-items-center justify-content-evenly"
             >
               <svg
                 width="25"

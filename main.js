@@ -4,6 +4,25 @@ createApp({
   data() {
     return {
       currentChat: 0,
+      searchChat: "",
+
+      casualAnswers: [
+        "Sì, certo!",
+        "No, purtroppo",
+        "Forse, vediamo",
+        "Assolutamente!",
+        "Non ne sono sicuro",
+        "Chiaro!",
+        "Mmm, boh...",
+        "Oh, assolutamente no!",
+        "Beh, dipende",
+        "Ma certo!",
+        "Come stai oggi?",
+        " al momento no",
+        "ti rende più felice?",
+        "C'è qualcosa di nuovo?",
+        "Qual è il tuo sogno nel cassetto?",
+      ],
       newMsg: {
         date: "",
         message: "",
@@ -181,10 +200,23 @@ createApp({
           ],
         },
       ],
+      contactsSearch: [],
     };
   },
 
   methods: {
+    searchInChats() {
+      this.searchChat = this.searchChat.toLowerCase();
+
+      this.contacts.forEach((item) => {
+        if (item.name.toLowerCase().includes(this.searchChat)) {
+          this.contactsSearch.push(item);
+        }
+      });
+
+      return this.contactsSearch;
+    },
+
     openChat(index) {
       this.currentChat = index;
     },
@@ -211,8 +243,9 @@ createApp({
       let now = new Date();
       let created = now;
       answer.date = created;
-      answer.message = "ok";
+      let num = Math.floor(Math.random() * 14);
 
+      answer.message = this.casualAnswers[num];
       current.messages.push(answer);
     },
     addTimeChat(param) {
@@ -222,4 +255,5 @@ createApp({
       return dateDisplay;
     },
   },
+  computed: {},
 }).mount("#app");
