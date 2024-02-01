@@ -205,6 +205,10 @@ createApp({
   },
 
   methods: {
+    emptyArr() {
+      this.contactsSearch = [];
+    },
+
     searchInChats() {
       this.searchChat = this.searchChat.toLowerCase();
 
@@ -224,7 +228,8 @@ createApp({
       const msg = { ...this.newMsg };
 
       let now = new Date();
-      let created = now;
+      let created = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+
       msg.date = created;
 
       if (msg.message !== "") {
@@ -232,7 +237,7 @@ createApp({
       }
 
       this.newMsg.message = "";
-      //this.msgSent = true;
+
       setTimeout(() => {
         this.sendNewResponse(current);
       }, 5000);
@@ -241,7 +246,7 @@ createApp({
     sendNewResponse(current) {
       const answer = { ...this.newAnswer };
       let now = new Date();
-      let created = now;
+      let created = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
       answer.date = created;
       let num = Math.floor(Math.random() * 14);
 

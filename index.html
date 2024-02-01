@@ -69,7 +69,8 @@
 
                 <input
                   v-model="searchChat"
-                  @update="searchInChats"
+                  @keyup="searchInChats"
+                  @keydown="emptyArr"
                   type="text"
                   class="form-control"
                   aria-label="Sizing example input"
@@ -80,9 +81,8 @@
             </div>
             <!-- CONTACTS PART -->
             <div class="contacts-list bg-light overflow-y-scroll">
-              <!-- <div class="d-none">{{searchInChats()}}</div> -->
               <div
-                v-for="(person, index ) in searchChat ==='' ? contacts : searchInChats()"
+                v-for="(person, index ) in searchChat ===`` ? contacts : contactsSearch"
                 :key="index"
               >
                 <div
