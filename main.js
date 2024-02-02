@@ -3,6 +3,7 @@ createApp({
   created() {},
   data() {
     return {
+      visible: true,
       currentChat: 0,
       searchChat: "",
       emojiArray: [
@@ -233,8 +234,10 @@ createApp({
     },
 
     deleteMsg(msg, idx, curr) {
-      this.contacts[curr].messages.forEach((_, index, arr) => {
-        if (idx === index) {
+      this.contacts[curr].messages.forEach((item, index, arr) => {
+        if (arr.length === 1) {
+          this.contacts[curr].visible = false;
+        } else if (idx === index) {
           arr.splice(index, 1);
         }
       });

@@ -87,7 +87,7 @@
               >
                 <div
                   @click="openChat(index)"
-                  class="d-flex align-items-center gap-1 border-bottom border-secondary-subtle px-2 py-2 contact-card"
+                  :class="person.visible === true ? `d-flex align-items-center gap-1 border-bottom border-secondary-subtle px-2 py-2 contact-card` :`d-none`"
                   :class="(currentChat === index)? `bg-secondary-subtle`: ``"
                 >
                   <figure class="mb-0">
@@ -145,7 +145,10 @@
               </div>
             </div>
             <!-- CHAT WINDOW -->
-            <div class="chat-window overflow-y-scroll">
+            <div
+              v-if="contacts[currentChat].messages && contacts[currentChat].visible===true"
+              class="chat-window overflow-y-scroll"
+            >
               <div v-for="(msg, index) in contacts[currentChat].messages">
                 <div
                   v-if="msg.status === `sent`"
@@ -195,6 +198,9 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div v-else class="chat-window overflow-y-scroll">
+              <div class="bg-light">Non ci sono messaggi...</div>
             </div>
             <!-- INPUTFIELD FOR SENDING A NEW MSG-s -->
             <div
