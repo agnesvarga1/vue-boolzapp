@@ -5,6 +5,29 @@ createApp({
     return {
       currentChat: 0,
       searchChat: "",
+      emojiArray: [
+        "😊",
+        "😂",
+        "❤️",
+        "👍",
+        "🙌",
+        "🔥",
+        "🎉",
+        "😍",
+        "🤔",
+        "👏",
+        "🙏",
+        "👋",
+        "🦢",
+        "😎",
+        "🌟",
+        "😭",
+        "😜",
+        "🤗",
+        "🚀",
+        "🤑",
+        "💩",
+      ],
 
       casualAnswers: [
         "Sì, certo!",
@@ -205,8 +228,12 @@ createApp({
   },
 
   methods: {
+    addEmoji(index) {
+      this.newMsg.message = this.newMsg.message + this.emojiArray[index];
+    },
+
     deleteMsg(msg, idx, curr) {
-      this.contacts[curr].messages.forEach((element, index, arr) => {
+      this.contacts[curr].messages.forEach((_, index, arr) => {
         if (idx === index) {
           arr.splice(index, 1);
         }
